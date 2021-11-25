@@ -97,6 +97,38 @@ class Responder {
       memo
     );
   }
+  
+  sendHiveTo(username, amount, memo = '') {
+    this._throwErrorIfNoActiveKey();
+
+    const from = this.responderUsername;
+    const to = username;
+    amount = `${parseFloat(amount).toFixed(3)} HIVE`;
+
+    return hivejs.broadcast.transferAsync(
+      this.activeKey,
+      from,
+      to,
+      amount,
+      memo
+    );
+  }
+
+  sendHbdTo(username, amount, memo) {
+    this._throwErrorIfNoActiveKey();
+
+    const from = this.responderUsername;
+    const to = username;
+    amount = `${parseFloat(amount).toFixed(3)} HBD`;
+
+    return hivejs.broadcast.transferAsync(
+      this.activeKey,
+      from,
+      to,
+      amount,
+      memo
+    );
+  }
 
   comment(
     message,
